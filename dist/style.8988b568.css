@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap");
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #41a9f3;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 21px;
+  font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 3rem 1fr 3rem;
+  grid-template-areas: "l header r" "l main r";
+}
+body > main {
+  grid-area: main;
+}
+body > header {
+  grid-area: header;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  padding: 1rem;
+}
+
+#box {
+  height: 25vmin;
+  width: 25vmin;
+  background-color: var(--color-primary);
+  left: calc(var(--x) * 1px);
+  top: calc(var(--y) * 1px);
+  transform: translate(calc(var(--dx) * 1px), calc(var(--dy) * 1px));
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+#box:after {
+  content: "state: " attr(data-state);
+  position: absolute;
+  top: 100%;
+  margin-top: 0.5rem;
+  background: black;
+  font-family: monospace;
+  color: white;
+  padding: 0.25rem;
+  border-radius: inherit;
+  white-space: nowrap;
+}
+
+#box[data-state^=dragging] {
+  opacity: 0.8;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+#box[data-state=idle] {
+  transition: all 0.3s ease-in-out;
+}
+
+#button {
+  appearance: none;
+  background: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  border: none;
+  font-weight: bold;
+}
+
+button {
+  appearance: none;
+  font-size: 1rem;
+  background: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+#app {
+  --color-bg: white;
+  --color-fg: black;
+  --brightness: 1;
+  flex-direction: column;
+}
+#app:before {
+  content: attr(data-state);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0.5rem;
+  background: black;
+  font-family: monospace;
+  color: white;
+  padding: 0.25rem;
+  border-radius: inherit;
+  white-space: nowrap;
+}
+#app[data-state~=hidden] #display {
+  opacity: 0;
+  transform: translateY(50%);
+}
+#app[data-state~=visible] #display {
+  transform: none;
+}
+#app[data-state~="visible.mode.dark"] {
+  --color-bg: black;
+  --color-fg: white;
+}
+#app[data-state~="visible.brightness.dim"] {
+  --brightness: 0.5;
+}
+
+#display {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  border: 2px solid var(--color-fg);
+  opacity: var(--brightness);
+  transition: all 0.6s ease;
+}
+
+button {
+  --color: blue;
+  appearance: none;
+  background: var(--color);
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+/*# sourceMappingURL=/style.8988b568.css.map */
